@@ -1,18 +1,19 @@
 CREATE DATABASE HSO;
 USE HSO;
 
-CREATE TABLE tbHospital(
-	idHospital INT PRIMARY KEY,
-	nomeHospital VARCHAR(45),
-	nomeDiretor VARCHAR(45)
+CREATE TABLE tbRedeHospitalar(
+	idRede INT PRIMARY KEY,
+	nomeRede VARCHAR(45)
 );
 
 CREATE TABLE tbFilialHospital(
 	idFilial INT PRIMARY KEY,
-    fkHospital INT,
-    FOREIGN KEY (fkHospital) REFERENCES tbHospital (idHospital),
+    fkRede INT,
+    FOREIGN KEY (fkRede) REFERENCES tbRedeHospitalar (idRede),
     cepFilial INT,
-    numeroEndFilial VARCHAR(45)
+    numeroEndFilial VARCHAR(45),
+    cnpjFilial VARCHAR(45),
+    senhaFilial VARCHAR(45)
 );
     
 CREATE TABLE tbTelefoneHospital(
@@ -52,20 +53,18 @@ CREATE TABLE tbComponente(
 );
 
 CREATE TABLE tbPacote(
-	fkMaquinaPacote INT,
-	FOREIGN KEY (fkMaquinaPacote) REFERENCES tbMaquina (idMaquina),
-	fkComponentePacote INT,
-    FOREIGN KEY (fkComponentePacote) REFERENCES tbComponente (idComponente),
-	precoPacote VARCHAR(45),
-	PRIMARY KEY (fkMaquinaPacote, fkComponentePacote)
+	idPacote INT PRIMARY KEY,
+	fkMaquina INT,
+	FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
+	fkComponente INT,
+    FOREIGN KEY (fkComponente) REFERENCES tbComponente (idComponente),
+	valorTotal VARCHAR(45)
 );
 
-CREATE TABLE tbRegistros(
-	idRegistros INT PRIMARY KEY,
-    fkMaquina INT,
-    FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
-    valorCPU VARCHAR(45),
-    valorMemoria VARCHAR(45),
-    valorDisco VARCHAR(45),
+CREATE TABLE tbHistorico(
+	idHistorico INT PRIMARY KEY,
+    fkPacote INT,
+    FOREIGN KEY (fkPacote) REFERENCES tbPacote (idPacote),
+    valorRegistro VARCHAR(45),
 	momentoRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
