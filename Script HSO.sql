@@ -29,7 +29,7 @@ CREATE TABLE tbUsuario(
 	idUsuario INT PRIMARY KEY,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
-	nome VARCHAR(45),
+	nomeUsuario VARCHAR(45),
 	cpf VARCHAR(45),
 	email VARCHAR(45),
     senha VARCHAR(45),
@@ -40,11 +40,12 @@ CREATE TABLE tbMaquina(
 	idMaquina INT PRIMARY KEY,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
+    hostName VARCHAR(45),
 	marcaMaquina VARCHAR(45),
 	alaMaquina VARCHAR(45),
     andarMaquina INT,
-	numeroSerie VARCHAR(45),
-	sistemaOperacional VARCHAR(45)
+	sistemaOperacional VARCHAR(45),
+    senhaMaquina VARCHAR(45)
 );
 
 CREATE TABLE tbComponente(
