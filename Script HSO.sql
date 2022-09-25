@@ -2,12 +2,18 @@ CREATE DATABASE HSO;
 USE HSO;
 
 CREATE TABLE tbRedeHospitalar(
-	idRede INT PRIMARY KEY,
+	idRede INT PRIMARY KEY auto_increment,
 	nomeRede VARCHAR(45)
 );
 
+select * from tbRedeHospitalar;
+
+insert into tbRedeHospitalar 
+values (null, 'plena');
+
+
 CREATE TABLE tbFilialHospital(
-	idFilial INT PRIMARY KEY,
+	idFilial INT PRIMARY KEY auto_increment,
     fkRede INT,
     FOREIGN KEY (fkRede) REFERENCES tbRedeHospitalar (idRede),
     cepFilial INT,
@@ -15,9 +21,11 @@ CREATE TABLE tbFilialHospital(
     cnpjFilial VARCHAR(45),
     senhaFilial VARCHAR(45)
 );
+
+select * from tbFilialHospital;
     
 CREATE TABLE tbTelefoneHospital(
-	idTelefone INT PRIMARY KEY,
+	idTelefone INT PRIMARY KEY auto_increment,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     numeroTelefone VARCHAR(45),
@@ -26,7 +34,7 @@ CREATE TABLE tbTelefoneHospital(
 );
   
 CREATE TABLE tbUsuario(
-	idUsuario INT PRIMARY KEY,
+	idUsuario INT PRIMARY KEY auto_increment,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
 	nomeUsuario VARCHAR(45),
@@ -37,7 +45,7 @@ CREATE TABLE tbUsuario(
 );
 
 CREATE TABLE tbMaquina(
-	idMaquina INT PRIMARY KEY,
+	idMaquina INT PRIMARY KEY auto_increment,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     hostName VARCHAR(45),
@@ -49,12 +57,12 @@ CREATE TABLE tbMaquina(
 );
 
 CREATE TABLE tbComponente(
-	idComponente INT PRIMARY KEY,
+	idComponente INT PRIMARY KEY auto_increment,
 	nomeComponente VARCHAR(45)
 );
 
 CREATE TABLE tbPacote(
-	idPacote INT PRIMARY KEY,
+	idPacote INT PRIMARY KEY auto_increment,
 	fkMaquina INT,
 	FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
 	fkComponente INT,
@@ -63,9 +71,10 @@ CREATE TABLE tbPacote(
 );
 
 CREATE TABLE tbHistorico(
-	idHistorico INT PRIMARY KEY,
+	idHistorico INT PRIMARY KEY auto_increment,
     fkPacote INT,
     FOREIGN KEY (fkPacote) REFERENCES tbPacote (idPacote),
     valorRegistro VARCHAR(45),
 	momentoRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+drop database hso;
