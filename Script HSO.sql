@@ -2,30 +2,26 @@ CREATE DATABASE HSO;
 USE HSO;
 
 CREATE TABLE tbRedeHospitalar(
-	idRede INT PRIMARY KEY auto_increment,
+	idRede INT PRIMARY KEY AUTO_INCREMENT,
 	nomeRede VARCHAR(45)
 );
 
-select * from tbRedeHospitalar;
-
-insert into tbRedeHospitalar 
-values (null, 'plena');
-
+-- insert into tbRedeHospitalar 
+-- values (null, 'plena');
 
 CREATE TABLE tbFilialHospital(
-	idFilial INT PRIMARY KEY auto_increment,
+	idFilial INT PRIMARY KEY AUTO_INCREMENT,
     fkRede INT,
     FOREIGN KEY (fkRede) REFERENCES tbRedeHospitalar (idRede),
     cepFilial INT,
     numeroEndFilial VARCHAR(45),
+    complementoEnd VARCHAR(45),
     cnpjFilial VARCHAR(45),
     senhaFilial VARCHAR(45)
 );
-
-select * from tbFilialHospital;
     
 CREATE TABLE tbTelefoneHospital(
-	idTelefone INT PRIMARY KEY auto_increment,
+	idTelefone INT PRIMARY KEY AUTO_INCREMENT,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     numeroTelefone VARCHAR(45),
@@ -34,7 +30,7 @@ CREATE TABLE tbTelefoneHospital(
 );
   
 CREATE TABLE tbUsuario(
-	idUsuario INT PRIMARY KEY auto_increment,
+	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
 	nomeUsuario VARCHAR(45),
@@ -44,8 +40,8 @@ CREATE TABLE tbUsuario(
 	cargo VARCHAR(45)
 );
 
-CREATE TABLE tbMaquina(
-	idMaquina INT PRIMARY KEY auto_increment,
+CREATE TABLE tbInfoMaquina(
+	idInfoMaquina INT PRIMARY KEY AUTO_INCREMENT,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     hostName VARCHAR(45),
@@ -57,24 +53,32 @@ CREATE TABLE tbMaquina(
 );
 
 CREATE TABLE tbComponente(
-	idComponente INT PRIMARY KEY auto_increment,
+	idComponente INT PRIMARY KEY AUTO_INCREMENT,
 	nomeComponente VARCHAR(45)
 );
 
-CREATE TABLE tbPacote(
-	idPacote INT PRIMARY KEY auto_increment,
-	fkMaquina INT,
-	FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
+CREATE TABLE tbMaquina(
+	idMaquina INT PRIMARY KEY AUTO_INCREMENT,
+	fkInfoMaquina INT,
+	FOREIGN KEY (fkInfoMaquina) REFERENCES tbInfoMaquina (idInfoMaquina),
 	fkComponente INT,
     FOREIGN KEY (fkComponente) REFERENCES tbComponente (idComponente),
 	valorTotal VARCHAR(45)
 );
 
 CREATE TABLE tbHistorico(
-	idHistorico INT PRIMARY KEY auto_increment,
-    fkPacote INT,
-    FOREIGN KEY (fkPacote) REFERENCES tbPacote (idPacote),
+	idHistorico INT PRIMARY KEY AUTO_INCREMENT,
+    fkMaquina INT,
+    FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
     valorRegistro VARCHAR(45),
 	momentoRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-drop database hso;
+
+SELECT * FROM tbRedeHospitalar;
+SELECT * FROM tbFilialHospital;
+SELECT * FROM tbTelefoneHospital;
+SELECT * FROM tbUsuario;
+SELECT * FROM tbInfoMaquina;
+SELECT * FROM tbComponente;
+SELECT * FROM tbMaquina;
+SELECT * FROM tbHistorico;
