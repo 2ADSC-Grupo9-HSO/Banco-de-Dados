@@ -6,8 +6,8 @@ CREATE TABLE tbRedeHospitalar(
 	nomeRede VARCHAR(45)
 );
 
--- insert into tbRedeHospitalar 
--- values (null, 'plena');
+insert into tbRedeHospitalar 
+values (null, 'plena');
 
 CREATE TABLE tbFilialHospital(
 	idFilial INT PRIMARY KEY AUTO_INCREMENT,
