@@ -9,6 +9,7 @@ CREATE TABLE tbRedeHospitalar(
 insert into tbRedeHospitalar 
 values (null, 'plena');
 
+
 CREATE TABLE tbFilialHospital(
 	idFilial INT PRIMARY KEY AUTO_INCREMENT,
     fkRede INT,
@@ -73,6 +74,20 @@ CREATE TABLE tbHistorico(
     valorRegistro VARCHAR(45),
 	momentoRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+select idRede, nomeRede, idFilial, cnpjFilial
+from tbFilialHospital
+join tbRedeHospitalar
+on idRede = fkRede
+WHERE cnpjFilial = '12345678901234' AND senhaFilial = '1';
+
+select fkFilial, nomeUsuario from tbUsuario where  senha = '12' and cpf = '11111111111';
+
+select idRede, nomeRede, idFilial
+    from tbFilialHospital
+    join tbRedeHospitalar
+    on idRede = fkRede
+    WHERE cnpjFilial = '11111111111' AND senhaFilial = '12';
 
 SELECT * FROM tbRedeHospitalar;
 SELECT * FROM tbFilialHospital;
