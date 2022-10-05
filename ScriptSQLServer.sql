@@ -1,8 +1,9 @@
 CREATE DATABASE HSO;
 USE HSO;
+GO;
 
 CREATE TABLE tbRedeHospitalar(
-	idRede INT PRIMARY KEY AUTO_INCREMENT,
+	idRede INT PRIMARY KEY IDENTITY(1,1),
 	nomeRede VARCHAR(45)
 );
 
@@ -10,7 +11,7 @@ INSERT INTO tbRedeHospitalar
 VALUES (NULL, 'Plena');
 
 CREATE TABLE tbFilialHospital(
-	idFilial INT PRIMARY KEY AUTO_INCREMENT,
+	idFilial INT PRIMARY KEY IDENTITY(1,1),
     fkRede INT,
     FOREIGN KEY (fkRede) REFERENCES tbRedeHospitalar (idRede),
     cepFilial INT,
@@ -21,7 +22,7 @@ CREATE TABLE tbFilialHospital(
 );
     
 CREATE TABLE tbTelefoneHospital(
-	idTelefone INT PRIMARY KEY AUTO_INCREMENT,
+	idTelefone INT PRIMARY KEY IDENTITY(1,1),
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     numeroTelefone VARCHAR(45),
@@ -30,7 +31,7 @@ CREATE TABLE tbTelefoneHospital(
 );
   
 CREATE TABLE tbUsuario(
-	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+	idUsuario INT PRIMARY KEY IDENTITY(1,1),
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
 	nomeUsuario VARCHAR(45),
@@ -41,7 +42,7 @@ CREATE TABLE tbUsuario(
 );
 
 CREATE TABLE tbInfoMaquina(
-	idInfoMaquina INT PRIMARY KEY AUTO_INCREMENT,
+	idInfoMaquina INT PRIMARY KEY IDENTITY(1,1),
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     hostName VARCHAR(45),
@@ -53,12 +54,12 @@ CREATE TABLE tbInfoMaquina(
 );
 
 CREATE TABLE tbComponente(
-	idComponente INT PRIMARY KEY AUTO_INCREMENT,
+	idComponente INT PRIMARY KEY IDENTITY(1,1),
 	nomeComponente VARCHAR(45)
 );
 
 CREATE TABLE tbMaquina(
-	idMaquina INT PRIMARY KEY AUTO_INCREMENT,
+	idMaquina INT PRIMARY KEY IDENTITY(1,1),
 	fkInfoMaquina INT,
 	FOREIGN KEY (fkInfoMaquina) REFERENCES tbInfoMaquina (idInfoMaquina),
 	fkComponente INT,
@@ -67,18 +68,11 @@ CREATE TABLE tbMaquina(
 );
 
 CREATE TABLE tbHistorico(
-	idHistorico INT PRIMARY KEY AUTO_INCREMENT,
+	idHistorico INT PRIMARY KEY IDENTITY(1,1),
     fkMaquina INT,
     FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
     valorRegistro VARCHAR(45),
 	momentoRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-SELECT * FROM tbRedeHospitalar;
-SELECT * FROM tbFilialHospital;
-SELECT * FROM tbTelefoneHospital;
-SELECT * FROM tbUsuario;
-SELECT * FROM tbInfoMaquina;
-SELECT * FROM tbComponente;
-SELECT * FROM tbMaquina;
-SELECT * FROM tbHistorico;
+SELECT * FROM INFORMATION_SCHEMA.TABLES;
