@@ -1,22 +1,21 @@
 CREATE DATABASE HSO;
+
 USE HSO;
 
 CREATE TABLE tbRedeHospitalar(
 	idRede INT PRIMARY KEY AUTO_INCREMENT,
-	nomeRede VARCHAR(45)
+	nomeRede VARCHAR(45),
+    emailRede VARCHAR(45)
 );
-
-INSERT INTO tbRedeHospitalar 
-VALUES (NULL, 'Plena');
 
 CREATE TABLE tbFilialHospital(
 	idFilial INT PRIMARY KEY AUTO_INCREMENT,
     fkRede INT,
     FOREIGN KEY (fkRede) REFERENCES tbRedeHospitalar (idRede),
-    cepFilial INT,
+    cepFilial CHAR(8),
     numeroEndFilial VARCHAR(45),
     complementoEnd VARCHAR(45),
-    cnpjFilial VARCHAR(45),
+    cnpjFilial CHAR(14),
     senhaFilial VARCHAR(45)
 );
     
@@ -34,10 +33,10 @@ CREATE TABLE tbUsuario(
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
 	nomeUsuario VARCHAR(45),
-    cargo VARCHAR(45),
-    email VARCHAR(45),
-	cpf VARCHAR(45),
-    senha VARCHAR(45)
+	cpf CHAR(11),
+	email VARCHAR(45),
+    senha VARCHAR(45),
+	cargo VARCHAR(45)
 );
 
 CREATE TABLE tbInfoMaquina(
@@ -46,9 +45,9 @@ CREATE TABLE tbInfoMaquina(
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     hostName VARCHAR(45),
 	marcaMaquina VARCHAR(45),
-    sistemaOperacional VARCHAR(45),
-	alaMaquina VARCHAR(45),
-    andarMaquina INT
+    andarMaquina INT,
+	sistemaOperacional VARCHAR(45),
+    senhaMaquina VARCHAR(45)
 );
 
 CREATE TABLE tbComponente(
@@ -72,12 +71,3 @@ CREATE TABLE tbHistorico(
     valorRegistro VARCHAR(45),
 	momentoRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
-SELECT * FROM tbRedeHospitalar;
-SELECT * FROM tbFilialHospital;
-SELECT * FROM tbTelefoneHospital;
-SELECT * FROM tbUsuario;
-SELECT * FROM tbInfoMaquina;
-SELECT * FROM tbComponente;
-SELECT * FROM tbMaquina;
-SELECT * FROM tbHistorico;
