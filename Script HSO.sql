@@ -5,7 +5,8 @@ USE HSO;
 CREATE TABLE tbRedeHospitalar(
 	idRede INT PRIMARY KEY AUTO_INCREMENT,
 	nomeRede VARCHAR(45),
-    emailRede VARCHAR(45)
+    emailRede VARCHAR(45),
+    senhaRede VARCHAR(45)
 );
 
 CREATE TABLE tbFilialHospital(
