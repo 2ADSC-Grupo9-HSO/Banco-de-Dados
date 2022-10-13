@@ -1,5 +1,4 @@
 CREATE DATABASE HSO;
-
 USE HSO;
 
 CREATE TABLE tbRedeHospitalar(
@@ -17,7 +16,8 @@ CREATE TABLE tbFilialHospital(
     numeroEndFilial VARCHAR(45),
     complementoEnd VARCHAR(45),
     cnpjFilial CHAR(14),
-    senhaFilial VARCHAR(45)
+    senhaFilial VARCHAR(45),
+    emailFilial VARCHAR(45)
 );
     
 CREATE TABLE tbTelefoneHospital(
@@ -34,10 +34,10 @@ CREATE TABLE tbUsuario(
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
 	nomeUsuario VARCHAR(45),
+    cargo VARCHAR(45),
+    email VARCHAR(45),
 	cpf CHAR(11),
-	email VARCHAR(45),
-    senha VARCHAR(45),
-	cargo VARCHAR(45)
+    senha VARCHAR(45)
 );
 
 CREATE TABLE tbInfoMaquina(
@@ -46,8 +46,8 @@ CREATE TABLE tbInfoMaquina(
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     hostName VARCHAR(45),
 	marcaMaquina VARCHAR(45),
+    sistemaOperacional VARCHAR(45),
     andarMaquina INT,
-	sistemaOperacional VARCHAR(45),
     senhaMaquina VARCHAR(45)
 );
 

@@ -4,7 +4,9 @@ GO;
 
 CREATE TABLE tbRedeHospitalar(
 	idRede INT PRIMARY KEY IDENTITY(1,1),
-	nomeRede VARCHAR(45)
+	nomeRede VARCHAR(45),
+    emailRede VARCHAR(45),
+    senhaRede VARCHAR(45)
 );
 
 INSERT INTO tbRedeHospitalar 
@@ -14,11 +16,12 @@ CREATE TABLE tbFilialHospital(
 	idFilial INT PRIMARY KEY IDENTITY(1,1),
     fkRede INT,
     FOREIGN KEY (fkRede) REFERENCES tbRedeHospitalar (idRede),
-    cepFilial INT,
+    cepFilial CHAR(8),
     numeroEndFilial VARCHAR(45),
     complementoEnd VARCHAR(45),
-    cnpjFilial VARCHAR(45),
-    senhaFilial VARCHAR(45)
+    cnpjFilial CHAR(14),
+    senhaFilial VARCHAR(45),
+    emailFilial VARCHAR(45)
 );
     
 CREATE TABLE tbTelefoneHospital(
@@ -37,7 +40,7 @@ CREATE TABLE tbUsuario(
 	nomeUsuario VARCHAR(45),
     cargo VARCHAR(45),
     email VARCHAR(45),
-	cpf VARCHAR(45),
+	cpf CHAR(11),
     senha VARCHAR(45)
 );
 
@@ -48,8 +51,8 @@ CREATE TABLE tbInfoMaquina(
     hostName VARCHAR(45),
 	marcaMaquina VARCHAR(45),
     sistemaOperacional VARCHAR(45),
-	alaMaquina VARCHAR(45),
-    andarMaquina INT
+    andarMaquina INT,
+    senhaMaquina VARCHAR(45)
 );
 
 CREATE TABLE tbComponente(
