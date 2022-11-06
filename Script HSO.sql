@@ -40,8 +40,8 @@ CREATE TABLE tbUsuario(
     senha VARCHAR(45)
 );
 
-CREATE TABLE tbInfoMaquina(
-	idInfoMaquina INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE tbMaquina(
+	idMaquina INT PRIMARY KEY AUTO_INCREMENT,
 	fkFilial INT,
     FOREIGN KEY (fkFilial) REFERENCES tbFilialHospital (idFilial),
     hostName VARCHAR(45),
@@ -56,19 +56,25 @@ CREATE TABLE tbComponente(
 	nomeComponente VARCHAR(45)
 );
 
-CREATE TABLE tbMaquina(
-	idMaquina INT PRIMARY KEY AUTO_INCREMENT,
-	fkInfoMaquina INT,
-	FOREIGN KEY (fkInfoMaquina) REFERENCES tbInfoMaquina (idInfoMaquina),
+CREATE TABLE tbHardware(
+	idHardware INT PRIMARY KEY AUTO_INCREMENT,
+	fkMaquina INT,
+	FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
 	fkComponente INT,
     FOREIGN KEY (fkComponente) REFERENCES tbComponente (idComponente),
-	valorTotal VARCHAR(45)
+	valorTotal DECIMAL(6,2)
 );
 
 CREATE TABLE tbHistorico(
 	idHistorico INT PRIMARY KEY AUTO_INCREMENT,
-    fkMaquina INT,
-    FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
-    valorRegistro VARCHAR(45),
+    fkHardware INT,
+    FOREIGN KEY (fkHardware) REFERENCES tbHardware (idHardware),
+    valorRegistro DECIMAL(5,2),
 	momentoRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO tbComponente (nomeComponente)
+VALUES
+('Processador'),
+('Memória Ram'),
+('Disco');
