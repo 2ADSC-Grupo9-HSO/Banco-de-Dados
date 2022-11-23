@@ -51,10 +51,11 @@ CREATE TABLE tbMaquina(
 	marcaMaquina VARCHAR(45),
     sistemaOperacional VARCHAR(45),
     andarMaquina INT,
-    senhaMaquina VARCHAR(45)
+    senhaMaquina VARCHAR(45),
+    chaveAtivacao CHAR(1)
 );
 
-CREATE TABLE processos(
+CREATE TABLE tbProcessos(
 	idProcesso INT PRIMARY KEY AUTO_INCREMENT,
     fkMaquina INT,
     FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
@@ -91,3 +92,5 @@ VALUES
 ('Processador'),
 ('Memória Ram'),
 ('Disco');
+
+select * from tbMaquina;
