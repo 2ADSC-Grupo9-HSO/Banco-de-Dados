@@ -13,6 +13,9 @@ CREATE TABLE tbFilialHospital(
     fkRede INT,
     FOREIGN KEY (fkRede) REFERENCES tbRedeHospitalar (idRede),
     cepFilial CHAR(8),
+    ruaFilial VARCHAR(45),
+    bairroFilial VARCHAR(45),
+    cidadeFilial VARCHAR(45),
     numeroEndFilial VARCHAR(45),
     complementoEnd VARCHAR(45),
     cnpjFilial CHAR(14),
@@ -49,6 +52,16 @@ CREATE TABLE tbMaquina(
     sistemaOperacional VARCHAR(45),
     andarMaquina INT,
     senhaMaquina VARCHAR(45)
+);
+
+CREATE TABLE processos(
+	idProcesso INT PRIMARY KEY AUTO_INCREMENT,
+    fkMaquina INT,
+    FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
+    pid VARCHAR(45),
+    nomeProcesso VARCHAR(45),
+    consumoRam DECIMAL(5,2),
+    chaveAtivacao CHAR(1)
 );
 
 CREATE TABLE tbComponente(

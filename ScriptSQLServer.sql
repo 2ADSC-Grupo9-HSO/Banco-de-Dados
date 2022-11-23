@@ -55,6 +55,16 @@ CREATE TABLE tbMaquina(
     senhaMaquina VARCHAR(45)
 );
 
+CREATE TABLE processos(
+	idProcesso INT PRIMARY KEY IDENTITY(1,1),
+    fkMaquina INT,
+    FOREIGN KEY (fkMaquina) REFERENCES tbMaquina (idMaquina),
+    pid VARCHAR(45),
+    nomeProcesso VARCHAR(45),
+    consumoRam DECIMAL(5,2),
+    chaveAtivacao CHAR(1)
+);
+
 CREATE TABLE tbComponente(
 	idComponente INT PRIMARY KEY IDENTITY(1,1),
 	nomeComponente VARCHAR(45)
